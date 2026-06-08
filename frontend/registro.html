@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <h1>
+            Fulbo 11
+        </h1>
+        <hr>
+    </header>
+    <div>
+        <form class="registro">
+            <input
+                type="text"
+                class="campo"
+                placeholder="NOMBRE DE USUARIO:"
+                id="username"
+            >
+            <input
+                type="email"
+                class="campo"
+                placeholder="CORREO ELECTRÓNICO:"
+                id="mail"
+            >
+            <input
+                type="password"
+                class="campo"
+                placeholder="CONTRASEÑA:"
+                id="pass"
+            >
+            <button class="btn" onclick="registrarUsuario()">
+                REGISTRARSE
+            </button>
+        </form>
+        <a href="login.html" class="btn">
+            Volver al inicio de sesión
+        </a>
+    </div>
+
+    <script src="scripts/logic.js"></script>
+</body>
+
+</html>
