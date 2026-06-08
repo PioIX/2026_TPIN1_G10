@@ -8,37 +8,35 @@
     <link rel="stylesheet" href="styles/styles.css">
 
 </head>
+
 <body>
-<header>
-    <h1>
-        Fulbo 11
-    </h1>
-    <hr>
-</header>
-  <div>
+    <header>
+        <h1>
+            Fulbo 11
+        </h1>
+        <hr>
+    </header>
+    <div>
         <form class="login">
 
-            <input
-                type="email"
-                class="campo"
-                placeholder="CORREO ELECTRÓNICO:"
-                id="email"
-            >
+            <input type="email" class="campo" placeholder="CORREO ELECTRÓNICO:" id="email">
 
-            <input
-                type="password"
-                class="campo"
-                placeholder="CONTRASEÑA:"
-                id="password"
-                >
+            <input type="password" class="campo" placeholder="CONTRASEÑA:" id="password">
 
             <button class="btn" onclick="loginUsuario()">
                 INICIAR SESIÓN
             </button>
-            
+
             <a href="registro.html" class="btn">
                 REGISTRARSE
             </a>
         </form>
     </div>
-    </body>
+    <img id="fotoJugador" alt="Foto de jugador">
+    <img id="fotoEquipo" alt="Foto de equipo">
+
+
+    <script src="scripts/logic.js"></script>
+</body>
+
+</html>
