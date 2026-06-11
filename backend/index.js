@@ -123,7 +123,7 @@ app.get('/datos', async function(req,res){
 
 app.post('/jugadores', async function(req,res) {
     console.log(req.body)
-    let jugadorExistente = await realizarQuery(`SELECT apellido FROM Jugadores WHERE apellido="${req.body.apellido}"`);
+    let jugadorExistente = await realizarQuery(`SELECT apellido FROM Jugadores WHERE Jugadores.apellido="${req.body.apellido}"`);
     console.log(jugadorExistente)
     if (jugadorExistente.length > 0) {
         res.send("El jugador ya existe");
@@ -138,7 +138,7 @@ app.post('/jugadores', async function(req,res) {
 
 app.post('/usuarios', async function(req,res) {
     console.log(req.body)
-    let usuarioExistente = await realizarQuery(`SELECT email FROM Usuarios WHERE email="${req.body.email}"`);
+    let usuarioExistente = await realizarQuery(`SELECT email FROM Usuarios WHERE Usuarios.email="${req.body.email}"`);
     console.log(usuarioExistente)
     if (usuarioExistente.length > 0) {
         res.send("El usuario ya existe");
@@ -153,7 +153,7 @@ app.post('/usuarios', async function(req,res) {
 
 app.post('/datos', async function(req,res) {
     console.log(req.body)
-    let datosExistentes = await realizarQuery(`SELECT id_jugador FROM Datos WHERE id_jugador=${req.body.id_jugador}`);
+    let datosExistentes = await realizarQuery(`SELECT id_jugador FROM Datos WHERE Datos.id_jugador=${req.body.id_jugador}`);
     console.log(datosExistentes)
     if (datosExistentes.length > 0) {
         res.send("Los datos ya existen");
@@ -163,5 +163,50 @@ app.post('/datos', async function(req,res) {
         (${req.body.edad},${req.body.altura},${req.body.peso},"${req.body.pierna_habil}",${req.body.id_jugador});
         `)
         res.send("Datos agregados")
+    }
+})
+
+app.post('/estadisticas', async function(req,res) {
+    console.log(req.body)
+    let estadisticasExistentes = await realizarQuery(`SELECT id_jugador FROM Estadisticas WHERE Estadisticas.id_jugador="${req.body.id_jugador}"`);
+    console.log(estadisticasExistentes)
+    if (estadisticasExistentes.length > 0) {
+        res.send("Las estadisticas ya existen");
+    } else {
+        await realizarQuery(`
+        INSERT INTO Estadisticas (goles,asistencias,titulos_equipo,titulos_seleccion,titulos_individuales,id_jugador) VALUES
+        (${req.body.goles},${req.body.asistencias},${req.body.titulos_equipo},${req.body.titulos_seleccion},${req.body.titulos_individuales},${req.body.id_jugador});
+        `)
+        res.send("Estadisticas agregadas")
+    }
+})
+
+app.post('/trayectoria', async function(req,res) {
+    console.log(req.body)
+    let trayectoriaExistente = await realizarQuery(`SELECT id_equipo FROM Trayectoria WHERE Trayectoria.id_equipo="${req.body.id_equipo}"`);
+    console.log(trayectoriaExistente)
+    if (trayectoriaExistente.length > 0) {
+        res.send("La trayectoria ya existe");
+    } else {
+        await realizarQuery(`
+        INSERT INTO Trayectoria (id_equipo,id_jugador,anio_traspaso,anio_ingreso,club_anterior) VALUES
+        (${req.body.id_equipo},${req.body.id_jugador},${req.body.anio_traspaso},${req.body.anio_ingreso},"${req.body.club_anterior}");
+        `)
+        res.send("Trayectoria agregada")
+    }
+})
+
+app.post('/equipos', async function(req,res) {
+    console.log(req.body)
+    let equipoExistente = await realizarQuery(`SELECT nombre_equipo FROM Equipos WHERE Equipos.nombre_equipo="${req.body.nombre_equipo}"`);
+    console.log(equipoExistente)
+    if (equipoExistente.length > 0) {
+        res.send("El equipo ya existe");
+    } else {
+        await realizarQuery(`
+        INSERT INTO Equipos (anio_creacion,titulos_nacionales,titulos_internacionales,ciudad,presidente,dt_actual,apodo,cantidad_socios,estadio,nombre_equipo) VALUES
+        (${req.body.anio_creacion},${req.body.titulos_nacionales},${req.body.titulos_internacionales},"${req.body.ciudad}","${req.body.presidente}","${req.body.dt_actual}","${req.body.apodo}",${req.body.cantidad_socios},"${req.body.estadio}","${req.body.nombre_equipo}");
+        `)
+        res.send("Equipo agregado")
     }
 })
