@@ -1,60 +1,64 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Wordle</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wordle</title>
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
+    
+<div class="tablero">
 
-<div class="board">
-
-    <div class="row">
-        <div class="tile">S</div>
-        <div class="tile">E</div>
-        <div class="tile">S</div>
-        <div class="tile">K</div>
-        <div class="tile yellow">O</div>
+    <div class="fila">
+        <div id="letra-1"></div>
+        <div id="letra-2"></div>
+        <div id="letra-3"></div>
+        <div id="letra-4"></div>
+        <div id="letra-5"></div>
     </div>
 
-    <div class="row">
-        <div class="tile">P</div>
-        <div class="tile yellow">U</div>
-        <div class="tile">Y</div>
-        <div class="tile yellow">O</div>
-        <div class="tile">L</div>
+</div>
+
+<!-- TECLADO -->
+
+<div id="teclado">
+
+    <div class="fila-teclado">
+        <div class="tecla">Q</div>
+        <div class="tecla">W</div>
+        <div class="tecla">E</div>
+        <div class="tecla">R</div>
+        <div class="tecla">T</div>
+        <div class="tecla">Y</div>
+        <div class="tecla">U</div>
+        <div class="tecla">I</div>
+        <div class="tecla">O</div>
+        <div class="tecla">P</div>
     </div>
 
-    <div class="row">
-        <div class="tile green">M</div>
-        <div class="tile">E</div>
-        <div class="tile">S</div>
-        <div class="tile">S</div>
-        <div class="tile">I</div>
+    <div class="fila-teclado">
+        <div class="tecla">A</div>
+        <div class="tecla">S</div>
+        <div class="tecla">D</div>
+        <div class="tecla">F</div>
+        <div class="tecla">G</div>
+        <div class="tecla">H</div>
+        <div class="tecla">J</div>
+        <div class="tecla">K</div>
+        <div class="tecla">L</div>
     </div>
 
-    <div class="row">
-        <div class="tile green">M</div>
-        <div class="tile">A</div>
-        <div class="tile">L</div>
-        <div class="tile">E</div>
-        <div class="tile yellow">N</div>
-    </div>
-
-    <div class="row">
-        <div class="tile green">M</div>
-        <div class="tile green">O</div>
-        <div class="tile yellow">T</div>
-        <div class="tile">T</div>
-        <div class="tile">A</div>
-    </div>
-
-    <div class="row">
-        <div class="tile green">M</div>
-        <div class="tile green">O</div>
-        <div class="tile green">U</div>
-        <div class="tile green">N</div>
-        <div class="tile green">T</div>
+    <div class="fila-teclado">
+        <div class="tecla grande">ENTER</div>
+        <div class="tecla">Z</div>
+        <div class="tecla">X</div>
+        <div class="tecla">C</div>
+        <div class="tecla">V</div>
+        <div class="tecla">B</div>
+        <div class="tecla">N</div>
+        <div class="tecla">M</div>
+        <div class="tecla grande">BKSP</div>
     </div>
 
 </div>
