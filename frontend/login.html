@@ -1,19 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fulbo 11</title>
+    <title>Fulbo 11 - Iniciar Sesión</title>
     <link rel="stylesheet" href="styles/styles.css">
 
 </head>
 
 <body>
     <header>
-        <h1>
-            Fulbo 11
-        </h1>
+        <h1>Fulbo 11</h1>
         <hr>
     </header>
     <div>
@@ -32,11 +30,24 @@
             </a>
         </form>
     </div>
-    <img id="fotoJugador" alt="Foto de jugador">
-    <img id="fotoEquipo" alt="Foto de equipo">
 
-
-    <script src="scripts/logic.js"></script>
+    <!-- Modal -->
+    <div class="modal fade" id="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="modalBody"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="scripts/dom.js"></script>
+    <script src="scripts/login_registro.js"></script>
 </body>
 
 </html>
