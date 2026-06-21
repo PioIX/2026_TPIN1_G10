@@ -3,65 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>wordle</title>
+    <title>Wordle</title>
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-    
-<div class="tablero">
+    <main>
+        <div id="mensaje"></div>
+        <div id="tablero" class="tablero"></div>
 
-    <div class="fila">
-        <div id="letra-1"></div>
-        <div id="letra-2"></div>
-        <div id="letra-3"></div>
-        <div id="letra-4"></div>
-        <div id="letra-5"></div>
-    </div>
+        <div id="teclado">
+            <div class="fila-teclado">
+                <button class="tecla">Q</button>
+                <button class="tecla">W</button>
+                <button class="tecla">E</button>
+                <button class="tecla">R</button>
+                <button class="tecla">T</button>
+                <button class="tecla">Y</button>
+                <button class="tecla">U</button>
+                <button class="tecla">I</button>
+                <button class="tecla">O</button>
+                <button class="tecla">P</button>
+            </div>
 
-</div>
+            <div class="fila-teclado">
+                <button class="tecla">A</button>
+                <button class="tecla">S</button>
+                <button class="tecla">D</button>
+                <button class="tecla">F</button>
+                <button class="tecla">G</button>
+                <button class="tecla">H</button>
+                <button class="tecla">J</button>
+                <button class="tecla">K</button>
+                <button class="tecla">L</button>
+            </div>
 
-<!-- TECLADO -->
+            <div class="fila-teclado">
+                <button class="tecla grande">ENTER</button>
+                <button class="tecla">Z</button>
+                <button class="tecla">X</button>
+                <button class="tecla">C</button>
+                <button class="tecla">V</button>
+                <button class="tecla">B</button>
+                <button class="tecla">N</button>
+                <button class="tecla">M</button>
+                <button class="tecla grande">BKSP</button>
+            </div>
+        </div>
+    </main>
 
-<div id="teclado">
-
-    <div class="fila-teclado">
-        <div class="tecla">Q</div>
-        <div class="tecla">W</div>
-        <div class="tecla">E</div>
-        <div class="tecla">R</div>
-        <div class="tecla">T</div>
-        <div class="tecla">Y</div>
-        <div class="tecla">U</div>
-        <div class="tecla">I</div>
-        <div class="tecla">O</div>
-        <div class="tecla">P</div>
-    </div>
-
-    <div class="fila-teclado">
-        <div class="tecla">A</div>
-        <div class="tecla">S</div>
-        <div class="tecla">D</div>
-        <div class="tecla">F</div>
-        <div class="tecla">G</div>
-        <div class="tecla">H</div>
-        <div class="tecla">J</div>
-        <div class="tecla">K</div>
-        <div class="tecla">L</div>
-    </div>
-
-    <div class="fila-teclado">
-        <div class="tecla grande">ENTER</div>
-        <div class="tecla">Z</div>
-        <div class="tecla">X</div>
-        <div class="tecla">C</div>
-        <div class="tecla">V</div>
-        <div class="tecla">B</div>
-        <div class="tecla">N</div>
-        <div class="tecla">M</div>
-        <div class="tecla grande">BKSP</div>
-    </div>
-
-</div>
-
+    <script src="scripts/wordle.js"></script>
 </body>
 </html>

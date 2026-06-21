@@ -27,7 +27,7 @@ async function registrarUsuario(){
             body: JSON.stringify({
                 name: nombre,
                 email: email,
-                contrasena: password
+                password: password
             })
         });
 
