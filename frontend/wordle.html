@@ -1,67 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>wordle</title>
+    <title>Wordle</title>
     <link rel="stylesheet" href="styles/styles.css">
+   
 </head>
 <body>
-    
-<div class="tablero">
+    <h1>⚽ WORDLE - JUGADORES DE FÚTBOL</h1>
 
-    <div class="fila">
-        <div id="letra-1"></div>
-        <div id="letra-2"></div>
-        <div id="letra-3"></div>
-        <div id="letra-4"></div>
-        <div id="letra-5"></div>
+    <div class="contenedor-game">
+        <div class="info-game">
+            Adivina el nombre en <span id="intentos-restantes">6</span> intentos
+            <br>
+            Letras: <span id="num-letras">5</span>
+        </div>
+
+        <div class="tablero" id="tablero">
+            <!-- Las filas se generarán dinámicamente -->
+        </div>
+
+        <div class="mensaje" id="mensaje"></div>
+
+        <div id="teclado">
+            <div class="fila-teclado">
+                <div class="tecla" data-letra="Q">Q</div>
+                <div class="tecla" data-letra="W">W</div>
+                <div class="tecla" data-letra="E">E</div>
+                <div class="tecla" data-letra="R">R</div>
+                <div class="tecla" data-letra="T">T</div>
+                <div class="tecla" data-letra="Y">Y</div>
+                <div class="tecla" data-letra="U">U</div>
+                <div class="tecla" data-letra="I">I</div>
+                <div class="tecla" data-letra="O">O</div>
+                <div class="tecla" data-letra="P">P</div>
+            </div>
+
+            <div class="fila-teclado">
+                <div class="tecla" data-letra="A">A</div>
+                <div class="tecla" data-letra="S">S</div>
+                <div class="tecla" data-letra="D">D</div>
+                <div class="tecla" data-letra="F">F</div>
+                <div class="tecla" data-letra="G">G</div>
+                <div class="tecla" data-letra="H">H</div>
+                <div class="tecla" data-letra="J">J</div>
+                <div class="tecla" data-letra="K">K</div>
+                <div class="tecla" data-letra="L">L</div>
+            </div>
+
+            <div class="fila-teclado">
+                <div class="tecla grande" id="enter">ENTER</div>
+                <div class="tecla" data-letra="Z">Z</div>
+                <div class="tecla" data-letra="X">X</div>
+                <div class="tecla" data-letra="C">C</div>
+                <div class="tecla" data-letra="V">V</div>
+                <div class="tecla" data-letra="B">B</div>
+                <div class="tecla" data-letra="N">N</div>
+                <div class="tecla" data-letra="M">M</div>
+                <div class="tecla grande" id="bksp">BKSP</div>
+            </div>
+        </div>
+
+        <button class="boton-nuevo" id="nuevo-juego">NUEVO JUEGO</button>
     </div>
 
-</div>
-
-<!-- TECLADO -->
-
-<div id="teclado">
-
-    <div class="fila-teclado">
-        <div class="tecla">Q</div>
-        <div class="tecla">W</div>
-        <div class="tecla">E</div>
-        <div class="tecla">R</div>
-        <div class="tecla">T</div>
-        <div class="tecla">Y</div>
-        <div class="tecla">U</div>
-        <div class="tecla">I</div>
-        <div class="tecla">O</div>
-        <div class="tecla">P</div>
-    </div>
-
-    <div class="fila-teclado">
-        <div class="tecla">A</div>
-        <div class="tecla">S</div>
-        <div class="tecla">D</div>
-        <div class="tecla">F</div>
-        <div class="tecla">G</div>
-        <div class="tecla">H</div>
-        <div class="tecla">J</div>
-        <div class="tecla">K</div>
-        <div class="tecla">L</div>
-    </div>
-
-    <div class="fila-teclado">
-        <div class="tecla grande">ENTER</div>
-        <div class="tecla">Z</div>
-        <div class="tecla">X</div>
-        <div class="tecla">C</div>
-        <div class="tecla">V</div>
-        <div class="tecla">B</div>
-        <div class="tecla">N</div>
-        <div class="tecla">M</div>
-        <div class="tecla grande">BKSP</div>
-    </div>
-
-</div>
-
+    <script src="scripts/logic.js"></script>
 </body>
 </html>
