@@ -1,42 +1,46 @@
-
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fulbo 11</title>
+
 </head>
-
 <body>
+    <header>
+        <h1>FULBO 11</h1>
+    </header>
 
+    <div class="panelJuego">
+        <p id="instruccionJuego">Elegí un jugador del país mostrado y colocalo en un espacio libre de la formación.</p>
+        <div class="estadoJuego">
+
+            <div><strong>País:</strong> <span id="paisActual"></span></div>
+            <div><strong>Ronda:</strong> <span id="rondaActual"></span></div>
+            <div><strong>Jugadores colocados:</strong> <span id="jugadoresColocados"></span></div>
+        </div>
+
+        <div id="mensajeJuego" class="mensajeJuego"></div>
+
+        <div class="barraProgreso">
+            <div id="rellenoProgreso" class="rellenoProgreso" style="width: 0%"></div>
+        </div>
+
+        <div id="textoProgreso" style="font-size: 13px; opacity: 0.9;"></div>
+        <div class="areaEntrada">
+            <input id="entradaJugador" type="text" list="sugerenciasJugadores" placeholder="Escribí el nombre del jugador" />
+            <datalist id="sugerenciasJugadores"></datalist>
+            <button id="botonReiniciar" type="button">Reiniciar</button>
+        </div>
+    </div>
+
+    <div class="cancha">
+        <div class="fila delanteros" id="delanteros"></div>
+        <div class="fila mediocampistas" id="mediocampistas"></div>
+        <div class="fila defensas" id="defensas"></div>
+        <div class="fila arquero" id="arquero"></div>
+    </div>
+
+    <script src="scripts/futbol11.js"></script>
 </body>
-
 </html>
-<header>
-    <h1>FULBO 11</h1>
-</header>
-
-<div class="cancha">
-
-    <div id="jugador j1"></div>
-    <div id="jugador j2"></div>
-    <div id="jugador j3"></div>
-
-    <div id="jugador j4"></div>
-    <div id="jugador j5"></div>
-    <div id="jugador j6"></div>
-
-    <div id="jugador j7"></div>
-    <div id="jugador j8"></div>
-    <div id="jugador j9"></div>
-    <div id="jugador j10"></div>
-
-    <div id="jugador j11"></div>
-
-</div>
-    <script src="scripts/logic.js"></script>
-    <script src="scripts/dom.js"></script> 
-</body>
-
-</html> 
