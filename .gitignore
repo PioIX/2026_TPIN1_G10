@@ -1,3 +1,5 @@
 backend/.home.env
 backend/.pio.env
 backend/.node_modules
+backend/home.env
+backend/pio.env
