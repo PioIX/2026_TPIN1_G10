@@ -1,154 +1,85 @@
-const formJugadorCompleto = document.getElementById('form-jugador-completo');
+const formJugador = document.getElementById('form-jugador-completo');
 const formClubes = document.getElementById('form-clubes');
-const mensajeJugadorCompleto = document.getElementById('mensaje-jugador-completo');
-const mensajeClubes = document.getElementById('mensaje-clubes');
+const msgJugador = document.getElementById('mensaje-jugador-completo');
+const msgClubes = document.getElementById('mensaje-clubes');
 
-async function enviarFormulario(form, url, mensajeElemento, metodo = 'POST') {
-    mensajeElemento.textContent = 'Guardando...';
+function formToObj(form) {
+    const o = {};
+    new FormData(form).forEach((v, k) => o[k] = v);
+    return o;
+}
 
-    const datos = new FormData(form);
-    const payload = {};
-
-    datos.forEach((value, key) => {
-        payload[key] = value;
-    });
-
-    try {
-        const respuesta = await fetch(url, {
-            method,
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
-
-        const texto = await respuesta.text();
-        mensajeElemento.textContent = texto;
-
-        if (respuesta.ok) {
-            form.reset();
-        }
-    } catch (error) {
-        console.error(error);
-        mensajeElemento.textContent = 'No se pudo conectar con el backend.';
+function buscarId(jugadores, nombre, apellido, idEquipo) {
+    for (let i = jugadores.length - 1; i >= 0; i--) {
+        const j = jugadores[i];
+        if (j.nombre === nombre && j.apellido === apellido && String(j.id_equipo) === String(idEquipo)) return j.id_jugador;
     }
+    return null;
 }
 
-async function obtenerIdJugadorCreado(nombre, apellido, idEquipo) {
-    const respuesta = await fetch('http://localhost:4000/jugadores');
-    const jugadores = await respuesta.json();
-
-    const jugador = jugadores
-        .filter((item) => item.nombre === nombre && item.apellido === apellido && String(item.id_equipo) === String(idEquipo))
-        .sort((a, b) => Number(b.id_jugador) - Number(a.id_jugador))[0];
-
-    return jugador ? jugador.id_jugador : null;
-}
-
-if (formJugadorCompleto) {
-    formJugadorCompleto.addEventListener('submit', async function (event) {
-        event.preventDefault();
-
-        const datos = new FormData(formJugadorCompleto);
-        const payloadJugador = {
-            nombre: datos.get('nombre'),
-            apellido: datos.get('apellido'),
-            pais: datos.get('pais'),
-            posicion: datos.get('posicion'),
-            poisicion: datos.get('posicion'),
-            dorsal_equipo: Number(datos.get('dorsal_equipo')),
-            dorsal_seleccion: Number(datos.get('dorsal_seleccion')),
-            valor_mercado: Number(datos.get('valor_mercado')),
-            id_equipo: Number(datos.get('id_equipo'))
+if (formJugador) {
+    formJugador.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        msgJugador.textContent = 'Creando...';
+        const f = formToObj(formJugador);
+        const jugador = {
+            nombre: f.nombre,
+            apellido: f.apellido,
+            pais: f.pais,
+            posicion: f.posicion,
+            dorsal_equipo: Number(f.dorsal_equipo) || 0,
+            dorsal_seleccion: Number(f.dorsal_seleccion) || 0,
+            valor_mercado: Number(f.valor_mercado) || 0,
+            id_equipo: Number(f.id_equipo) || 0
         };
 
-        mensajeJugadorCompleto.textContent = 'Creando jugador...';
-
         try {
-            const respuestaJugador = await fetch('http://localhost:4000/jugadores', {
+            const res1 = await fetch('http://localhost:4000/jugadores', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payloadJugador)
+                body: JSON.stringify(jugador)
             });
+            const text1 = await res1.text();
+            if (!res1.ok) { msgJugador.textContent = text1; return; }
 
-            const textoJugador = await respuestaJugador.text();
-            if (!respuestaJugador.ok) {
-                mensajeJugadorCompleto.textContent = textoJugador;
-                return;
-            }
+            const jugadores = await (await fetch('http://localhost:4000/jugadores')).json();
+            const idJugador = buscarId(jugadores, jugador.nombre, jugador.apellido, jugador.id_equipo);
+            if (!idJugador) { msgJugador.textContent = 'No se obtuvo el ID.'; return; }
 
-            const idJugador = await obtenerIdJugadorCreado(
-                payloadJugador.nombre,
-                payloadJugador.apellido,
-                payloadJugador.id_equipo
-            );
+            const datos = { id_jugador: idJugador, edad: Number(f.edad) || 0, altura: Number(f.altura) || 0, peso: Number(f.peso) || 0, pierna_habil: f.pierna_habil };
+            const estadisticas = { id_jugador: idJugador, goles: Number(f.goles) || 0, asistencias: Number(f.asistencias) || 0, titulos_equipo: Number(f.titulos_equipo) || 0, titulos_seleccion: Number(f.titulos_seleccion) || 0, titulos_individuales: Number(f.titulos_individuales) || 0 };
+            const trayectoria = { id_jugador: idJugador, id_equipo: Number(f.id_equipo) || 0, anio_traspaso: Number(f.anio_traspaso) || 0, anio_ingreso: Number(f.anio_ingreso) || 0 };
 
-            if (!idJugador) {
-                mensajeJugadorCompleto.textContent = 'No se pudo obtener el ID del jugador creado.';
-                return;
-            }
-
-            const payloadDatos = {
-                id_jugador: idJugador,
-                edad: Number(datos.get('edad')),
-                altura: Number(datos.get('altura')),
-                peso: Number(datos.get('peso')),
-                pierna_habil: datos.get('pierna_habil')
-            };
-
-            const payloadEstadisticas = {
-                id_jugador: idJugador,
-                goles: Number(datos.get('goles')),
-                asistencias: Number(datos.get('asistencias')),
-                titulos_equipo: Number(datos.get('titulos_equipo')),
-                titulos_seleccion: Number(datos.get('titulos_seleccion')),
-                titulos_individuales: Number(datos.get('titulos_individuales'))
-            };
-
-            const payloadTrayectoria = {
-                id_jugador: idJugador,
-                id_equipo: Number(datos.get('id_equipo')),
-                anio_traspaso: Number(datos.get('anio_traspaso')),
-                anio_ingreso: Number(datos.get('anio_ingreso'))
-            };
-
-            mensajeJugadorCompleto.textContent = 'Guardando datos adicionales...';
-
-            const respuestas = await Promise.all([
-                fetch('http://localhost:4000/datos', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payloadDatos)
-                }),
-                fetch('http://localhost:4000/estadisticas', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payloadEstadisticas)
-                }),
-                fetch('http://localhost:4000/trayectoria', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payloadTrayectoria)
-                })
+            msgJugador.textContent = 'Guardando datos...';
+            const r = await Promise.all([
+                fetch('http://localhost:4000/datos', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datos) }),
+                fetch('http://localhost:4000/estadisticas', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(estadisticas) }),
+                fetch('http://localhost:4000/trayectoria', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(trayectoria) })
             ]);
+            const texts = await Promise.all(r.map(x => x.text()));
+            if (r.some(x => !x.ok)) msgJugador.textContent = texts.join(' | ');
+            else { msgJugador.textContent = text1 + ' · Guardado.'; formJugador.reset(); }
 
-            const textos = await Promise.all(respuestas.map((respuesta) => respuesta.text()));
-            const hayError = respuestas.some((respuesta) => !respuesta.ok);
-
-            if (hayError) {
-                mensajeJugadorCompleto.textContent = textos.join(' | ');
-            } else {
-                mensajeJugadorCompleto.textContent = `${textoJugador} · Datos, estadísticas y trayectoria guardados.`;
-                formJugadorCompleto.reset();
-            }
-        } catch (error) {
-            console.error(error);
-            mensajeJugadorCompleto.textContent = 'No se pudo conectar con el backend.';
+        } catch (err) {
+            console.error(err);
+            msgJugador.textContent = 'No se pudo conectar con el backend.';
         }
     });
 }
 
 if (formClubes) {
-    formClubes.addEventListener('submit', function (event) {
-        event.preventDefault();
-        enviarFormulario(formClubes, 'http://localhost:4000/equipos', mensajeClubes);
+    formClubes.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        msgClubes.textContent = 'Guardando...';
+        const payload = formToObj(formClubes);
+        try {
+            const r = await fetch('http://localhost:4000/equipos', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+            const t = await r.text();
+            msgClubes.textContent = t;
+            if (r.ok) formClubes.reset();
+        } catch (err) {
+            console.error(err);
+            msgClubes.textContent = 'No se pudo conectar con el backend.';
+        }
     });
 }
