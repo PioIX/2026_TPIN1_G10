@@ -213,6 +213,53 @@ header img {
 }
 
 /* ================= POSICIONES ================= */
+.fila button{
+
+    width: 125px;
+    height: 42px;
+
+    background: linear-gradient(180deg,#1f3550,#0f1d2d);
+
+    border: 2px solid #6b7cff;
+
+    border-radius: 12px;
+
+    color: #dce5ff;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .25s;
+
+    box-shadow:
+        inset 0 1px 2px rgba(255,255,255,.15),
+        0 4px 12px rgba(0,0,0,.35);
+
+    overflow: hidden;
+}
+
+.fila button:hover{
+
+    background: linear-gradient(180deg,#2c4d74,#17304b);
+
+    border-color:#ffbe00;
+
+    color:white;
+
+    transform: translateY(-2px) scale(1.05);
+
+    box-shadow:
+        0 0 15px rgba(255,190,0,.45);
+
+}
+
+.fila button:active{
+
+    transform: scale(.97);
+
+}
 .fila div{
 
     width: 115px;
