@@ -1,56 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wordle</title>
-    <link rel="stylesheet" href="styles/styles.css">
+    <title>Wordle - Fulbo 11</title>
+    <link rel="stylesheet" href="styles/styles_wordle.css">
+   
 </head>
+<header>
+    <h1>WORDLE - FULBO 11</h1>
+    <img src="img/logo.png" alt="Logo">
+</header>
+<hr>
 <body>
-    <main>
-        <div id="mensaje"></div>
-        <div id="tablero" class="tablero"></div>
+
+    <div class="contenedor-game">
+        <div class="info-game">
+            Adivina el nombre en <span id="intentos-restantes">6</span> intentos
+            <br>
+            Letras: <span id="num-letras">5</span>
+        </div>
+
+        <div class="tablero" id="tablero">
+            <!-- Las filas se generarán dinámicamente -->
+        </div>
+
+        <div class="mensaje" id="mensaje"></div>
 
         <div id="teclado">
             <div class="fila-teclado">
-                <button class="tecla">Q</button>
-                <button class="tecla">W</button>
-                <button class="tecla">E</button>
-                <button class="tecla">R</button>
-                <button class="tecla">T</button>
-                <button class="tecla">Y</button>
-                <button class="tecla">U</button>
-                <button class="tecla">I</button>
-                <button class="tecla">O</button>
-                <button class="tecla">P</button>
+                <div class="tecla" data-letra="Q">Q</div>
+                <div class="tecla" data-letra="W">W</div>
+                <div class="tecla" data-letra="E">E</div>
+                <div class="tecla" data-letra="R">R</div>
+                <div class="tecla" data-letra="T">T</div>
+                <div class="tecla" data-letra="Y">Y</div>
+                <div class="tecla" data-letra="U">U</div>
+                <div class="tecla" data-letra="I">I</div>
+                <div class="tecla" data-letra="O">O</div>
+                <div class="tecla" data-letra="P">P</div>
             </div>
 
             <div class="fila-teclado">
-                <button class="tecla">A</button>
-                <button class="tecla">S</button>
-                <button class="tecla">D</button>
-                <button class="tecla">F</button>
-                <button class="tecla">G</button>
-                <button class="tecla">H</button>
-                <button class="tecla">J</button>
-                <button class="tecla">K</button>
-                <button class="tecla">L</button>
+                <div class="tecla" data-letra="A">A</div>
+                <div class="tecla" data-letra="S">S</div>
+                <div class="tecla" data-letra="D">D</div>
+                <div class="tecla" data-letra="F">F</div>
+                <div class="tecla" data-letra="G">G</div>
+                <div class="tecla" data-letra="H">H</div>
+                <div class="tecla" data-letra="J">J</div>
+                <div class="tecla" data-letra="K">K</div>
+                <div class="tecla" data-letra="L">L</div>
             </div>
 
             <div class="fila-teclado">
-                <button class="tecla grande">ENTER</button>
-                <button class="tecla">Z</button>
-                <button class="tecla">X</button>
-                <button class="tecla">C</button>
-                <button class="tecla">V</button>
-                <button class="tecla">B</button>
-                <button class="tecla">N</button>
-                <button class="tecla">M</button>
-                <button class="tecla grande">BKSP</button>
+                <div class="tecla grande" id="enter">ENTER</div>
+                <div class="tecla" data-letra="Z">Z</div>
+                <div class="tecla" data-letra="X">X</div>
+                <div class="tecla" data-letra="C">C</div>
+                <div class="tecla" data-letra="V">V</div>
+                <div class="tecla" data-letra="B">B</div>
+                <div class="tecla" data-letra="N">N</div>
+                <div class="tecla" data-letra="M">M</div>
+                <div class="tecla grande" id="bksp">BKSP</div>
             </div>
         </div>
-    </main>
 
-    <script src="scripts/wordle.js"></script>
+        <button class="boton-nuevo" id="nuevo-juego">NUEVO JUEGO</button>
+    </div>
+
+    <script src="scripts/logic.js"></script>
 </body>
 </html>

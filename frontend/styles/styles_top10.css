@@ -1,0 +1,154 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background: #4ade80;
+    color: white;
+    min-height: 100vh;
+}
+
+/* HEADER */
+
+header{
+    text-align: center;
+    padding: 25px 0 10px;
+}
+
+header h1{
+    font-size: 3rem;
+    font-style: italic;
+    font-weight: 900;
+    color: black;
+}
+
+header h1::first-letter{
+    color: #ffbe00;
+}
+
+hr{
+    width: 80%;
+    margin: 15px auto;
+    border: none;
+    height: 3px;
+    background: linear-gradient(to right,#ffbe00,#00b7ff);
+}
+
+/* CONSIGNA */
+
+#consignatop10{
+    text-align: center;
+    font-style: italic;
+    font-weight: 400;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+/* TABLA */
+
+.tabla{
+    width: 650px;
+    margin: auto;
+}
+
+.tabla > div{
+    display: flex;
+    align-items: center;
+    height: 42px;
+    margin-bottom: 8px;
+    background: #0b2233;
+    border: 1px solid #1d4967;
+    transition: .2s;
+}
+
+.tabla > div:hover{
+    background: #12324a;
+}
+
+[id^="posicion"]{
+    width: 50px;
+    text-align: center;
+    font-size: 1.4rem;
+    border-right: 1px solid #1d4967;
+}
+
+[id^="bandera"]{
+    width: 55px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+[id^="bandera"] img{
+    width: 35px;
+}
+
+[id^="nombre"]{
+    flex: 1;
+    padding-left: 15px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+/* INPUT */
+
+.input-container{
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+#respuesta{
+    width: 320px;
+    height: 48px;
+    border-radius: 12px;
+    border: 2px solid #d9d9d9;
+    background: #d8d8e4;
+    padding: 0 15px;
+    font-size: 1.1rem;
+}
+
+#respuesta:focus{
+    outline: none;
+    border-color: #ffbe00;
+}
+
+.input-container button{
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    border: 2px solid #ffbe00;
+    background: #05121d;
+    color: white;
+    cursor: pointer;
+    font-size: 1.3rem;
+    transition: .2s;
+}
+
+.input-container button:hover{
+    background: #ffbe00;
+    color: black;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:700px){
+
+    .tabla{
+        width: 95%;
+    }
+
+    header h1{
+        font-size: 2rem;
+    }
+
+    #respuesta{
+        width: 220px;
+    }
+}
