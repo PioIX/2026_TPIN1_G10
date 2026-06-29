@@ -151,7 +151,7 @@ header img {
     color: #05121d;
     font-weight: bold;
     cursor: pointer;
-    transition: .2s;
+    
 }
 
 #botonReiniciar:hover{
@@ -213,27 +213,113 @@ header img {
 }
 
 /* ================= POSICIONES ================= */
-
 .fila div{
-    width:85px;
-    height:85px;
-    border-radius:50%;
-    background:rgba(255,255,255,.12);
-    border:3px solid white;
+
+    width: 115px;
+    height: 38px;
 
     display:flex;
     justify-content:center;
     align-items:center;
 
-    font-size:12px;
-    font-weight:bold;
-    text-align:center;
+    border-radius:14px;
+
+    background:linear-gradient(
+        180deg,
+        #182b45 0%,
+        #102031 55%,
+        #09131f 100%
+    );
+
+    border:2px solid #6d8cff;
+
+    color:#b8c6ff;
+
+    font-size:15px;
+    font-weight:700;
+
+    letter-spacing:.8px;
 
     cursor:pointer;
-    transition:.2s;
-}
 
+    position:relative;
+
+    overflow:hidden;
+
+    transition:.25s;
+
+    box-shadow:
+    inset 0 1px 2px rgba(255,255,255,.15),
+    inset 0 -2px 6px rgba(0,0,0,.45),
+    0 8px 18px rgba(0,0,0,.35);
+
+}
+.fila div::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:45%;
+
+    background:linear-gradient(
+        rgba(255,255,255,.18),
+        transparent
+    );
+
+}
+.fila div::after{
+
+    content:"";
+
+    position:absolute;
+
+    bottom:0;
+    left:8px;
+
+    width:calc(100% - 16px);
+    height:2px;
+
+    background:#72a2ff;
+
+    box-shadow:0 0 8px #72a2ff;
+
+}
 .fila div:hover{
-    transform:scale(1.08);
-    background:rgba(255,190,0,.25);
+
+    transform:translateY(-3px);
+
+    border-color:#ffcc3d;
+
+    color:white;
+
+    background:linear-gradient(
+        180deg,
+        #213b61,
+        #14293f,
+        #0b1622
+    );
+
+    box-shadow:
+    0 0 18px rgba(255,204,61,.45),
+    0 10px 20px rgba(0,0,0,.45);
+
+}
+.ocupado{
+
+    border-color:#00d4ff !important;
+
+    color:white;
+
+    background:linear-gradient(
+        180deg,
+        #1d4d6b,
+        #123048,
+        #0c1e2d
+    );
+
 }
