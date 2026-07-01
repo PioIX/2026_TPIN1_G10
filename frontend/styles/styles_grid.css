@@ -1,3 +1,68 @@
+:root {
+    --color-fondo-claro: #2e7d32; /* Verde césped intenso y elegante */
+    --color-fondo-oscuro: #0a2e13; /* Verde bosque muy oscuro para dar profundidad */
+    
+    --color-texto: #f8fafc; /* Un blanco suave (no puro) para no cansar la vista */
+    --color-texto-oscuro: #0f172a; /* Gris pizarra casi negro, mejor que el negro puro */
+    
+    --color-boton: #fbbf24; /* Dorado/Amarillo para botones (resalta espectacular sobre verde) */
+    --color-boton-hover: #f59e0b; /* Dorado más oscuro al pasar el mouse */
+    
+    --color-tarjeta: rgba(255, 255, 255, 0.12); /* Efecto cristal un poco más sutil */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Degradado verde que simula los bocetos */
+    background: linear-gradient(135deg, var(--color-fondo-claro) 0%, var(--color-fondo-oscuro) 100%);
+    color: var(--color-texto);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    position: relative;
+    height: 100px;
+    width: 100%; /* El secreto está aquí, para que ocupe todo el ancho disponible */
+    max-width: 900px; /* Opcional: para alinearse perfectamente con el ancho de los juegos */
+    margin: 0 auto; /* Centra el contenedor del header en la pantalla */
+}
+
+header h1 {
+    margin: 0;
+    text-align: center;
+    line-height: 100px; /* Centrado vertical */
+    width: 100%;
+}
+
+header h1::first-letter{
+    color: #ffbe00;
+}
+
+header img {
+    position: absolute;
+    left: 20px; /* Lo empuja a la izquierda */
+    top: 50%;
+    transform: translateY(-50%); /* Centrado vertical perfecto de la imagen */
+    width: 80px;
+    height: auto;
+}
+
+hr {
+    width: 80%;
+    border: none;
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    margin: 10px auto 20px auto;
+}
+
 .grid {
     display: grid;
     grid-template-columns: 120px repeat(3, 100px);
