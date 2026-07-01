@@ -1,5 +1,3 @@
-// admin.js - versión comentada
-// Explicación casi línea por línea. Asume que la base de datos usa IDs auto-incrementales.
 
 // Obtener referencias a elementos del DOM por su id
 const formJugador = document.getElementById('form-jugador-completo'); // formulario para crear jugador completo
@@ -12,10 +10,10 @@ function formToObj(form) {
     const o = {}; // objeto resultado
     // FormData itera sobre los campos del formulario y añadimos cada par clave/valor al objeto
     new FormData(form).forEach((v, k) => o[k] = v);
+    console.log(o)
     return o; // devolvemos el objeto con los valores del formulario
 }
 
-// Buscar el último id_jugador que coincide por nombre, apellido e id_equipo
 // Recorremos el arreglo de jugadores desde el final para encontrar el más reciente
 function buscarId(jugadores, nombre, apellido, idEquipo) {
     for (let i = jugadores.length - 1; i >= 0; i--) {
@@ -135,4 +133,16 @@ if (formClubes) {
             msgClubes.textContent = 'No se pudo conectar con el backend.';
         }
     });
+}
+
+let idCelda = 1
+
+function agregar_form(){
+    idCelda++
+    let trayectoria = 
+    `<div id="celda${idCelda}">
+        <input type="number" name="anio_traspaso" placeholder="Año de traspaso" required>
+        <input type="number" name="anio_ingreso" placeholder="Año de ingreso" required>
+    </div>`
+    document.getElementById("trayectoria").innerHTML += trayectoria
 }

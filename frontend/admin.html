@@ -37,9 +37,14 @@
 
             <h3>Trayectoria</h3>
             <p>La trayectoria representa la relación muchos a muchos entre jugador y equipo. Podés cargar una fila por equipo en el que pasó.</p>
-            <input type="number" name="anio_traspaso" placeholder="Año de traspaso" required>
-            <input type="number" name="anio_ingreso" placeholder="Año de ingreso" required>
-
+            <button onclick="agregar_form()">+</button>
+            <div id="trayectoria">
+                <div id="celda1">
+                    <input type="number" name="anio_traspaso" placeholder="Año de traspaso" required>
+                    <input type="number" name="anio_ingreso" placeholder="Año de ingreso" required>
+                </div>
+            </div>
+            
             <button type="submit">Guardar jugador completo</button>
             <p id="mensaje-jugador-completo"></p>
         </form>
