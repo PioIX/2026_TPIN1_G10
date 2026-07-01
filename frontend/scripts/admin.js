@@ -4,13 +4,23 @@ const formJugador = document.getElementById('form-jugador-completo'); // formula
 const formClubes = document.getElementById('form-clubes'); // formulario para crear clubes
 const msgJugador = document.getElementById('mensaje-jugador-completo'); // elemento donde mostramos mensajes para jugador
 const msgClubes = document.getElementById('mensaje-clubes'); // elemento donde mostramos mensajes para clubes
+const btnAgregarTrayectoria = document.getElementById('btn-agregar-trayectoria');
 
 // Convierte un <form> en un objeto plano { campo: valor }
 function formToObj(form) {
     const o = {}; // objeto resultado
     // FormData itera sobre los campos del formulario y añadimos cada par clave/valor al objeto
-    new FormData(form).forEach((v, k) => o[k] = v);
-    console.log(o)
+    new FormData(form).forEach((v, k) => {
+        if (Object.prototype.hasOwnProperty.call(o, k)) {
+            if (Array.isArray(o[k])) {
+                o[k].push(v);
+            } else {
+                o[k] = [o[k], v];
+            }
+        } else {
+            o[k] = v;
+        }
+    });
     return o; // devolvemos el objeto con los valores del formulario
 }
 
@@ -83,21 +93,23 @@ if (formJugador) {
                 titulos_individuales: Number(f.titulos_individuales) || 0
             };
 
-            const trayectoria = {
+            const aniosTraspaso = Array.isArray(f.anio_traspaso) ? f.anio_traspaso : [f.anio_traspaso];
+            const aniosIngreso = Array.isArray(f.anio_ingreso) ? f.anio_ingreso : [f.anio_ingreso];
+            const trayectorias = aniosTraspaso.map((anioTraspaso, index) => ({
                 id_jugador: idJugador,
                 id_equipo: Number(f.id_equipo) || 0,
-                anio_traspaso: Number(f.anio_traspaso) || 0,
-                anio_ingreso: Number(f.anio_ingreso) || 0
-            };
+                anio_traspaso: Number(anioTraspaso) || 0,
+                anio_ingreso: Number(aniosIngreso[index] ?? aniosIngreso[0] ?? 0) || 0
+            }));
 
             // Avisamos que guardamos las tablas relacionadas
             msgJugador.textContent = 'Guardando datos...';
 
-            // Enviamos las 3 peticiones en paralelo y esperamos los resultados
+            // Enviamos las peticiones en paralelo y esperamos los resultados
             const r = await Promise.all([
                 fetch('http://localhost:4000/datos', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datos) }),
                 fetch('http://localhost:4000/estadisticas', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(estadisticas) }),
-                fetch('http://localhost:4000/trayectoria', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(trayectoria) })
+                ...trayectorias.map(trayectoria => fetch('http://localhost:4000/trayectoria', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(trayectoria) }))
             ]);
 
             // Leemos los textos de respuesta de cada petición (mensajes del backend)
@@ -105,7 +117,21 @@ if (formJugador) {
 
             // Si alguna petición falló mostramos todos los mensajes unidos, si no, confirmamos y reseteamos el formulario
             if (r.some(x => !x.ok)) msgJugador.textContent = texts.join(' | ');
-            else { msgJugador.textContent = text1 + ' · Guardado.'; formJugador.reset(); }
+            else {
+                msgJugador.textContent = text1 + ' · Guardado.';
+                formJugador.reset();
+                const contenedorTrayectoria = document.getElementById('trayectoria');
+                if (contenedorTrayectoria) {
+                    contenedorTrayectoria.innerHTML = `
+                        <div id="celda1" class="celda-trayectoria">
+                            <input type="number" name="anio_traspaso" placeholder="Año de traspaso" required>
+                            <input type="number" name="anio_ingreso" placeholder="Año de ingreso" required>
+                            <button type="button" class="btn-quitar-trayectoria">−</button>
+                        </div>
+                    `;
+                }
+                idCelda = 1;
+            }
 
         } catch (err) {
             // Capturamos errores de red o excepciones y mostramos mensaje genérico
@@ -138,11 +164,36 @@ if (formClubes) {
 let idCelda = 1
 
 function agregar_form(){
-    idCelda++
-    let trayectoria = 
-    `<div id="celda${idCelda}">
+    idCelda++;
+    const contenedor = document.getElementById('trayectoria');
+    if (!contenedor) return;
+
+    const fila = document.createElement('div');
+    fila.className = 'celda-trayectoria';
+    fila.id = `celda${idCelda}`;
+    fila.innerHTML = `
         <input type="number" name="anio_traspaso" placeholder="Año de traspaso" required>
         <input type="number" name="anio_ingreso" placeholder="Año de ingreso" required>
-    </div>`
-    document.getElementById("trayectoria").innerHTML += trayectoria
+        <button type="button" class="btn-quitar-trayectoria">−</button>
+    `;
+
+    contenedor.appendChild(fila);
 }
+
+if (btnAgregarTrayectoria) {
+    btnAgregarTrayectoria.addEventListener('click', function (e) {
+        e.preventDefault();
+        agregar_form();
+    });
+}
+
+document.addEventListener('click', function (event) {
+    const boton = event.target.closest('.btn-quitar-trayectoria');
+    if (!boton) return;
+
+    event.preventDefault();
+    const fila = boton.closest('.celda-trayectoria');
+    if (fila) {
+        fila.remove();
+    }
+});

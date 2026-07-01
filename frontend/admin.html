@@ -37,11 +37,12 @@
 
             <h3>Trayectoria</h3>
             <p>La trayectoria representa la relación muchos a muchos entre jugador y equipo. Podés cargar una fila por equipo en el que pasó.</p>
-            <button onclick="agregar_form()">+</button>
+            <button id="btn-agregar-trayectoria" type="button">+</button>
             <div id="trayectoria">
-                <div id="celda1">
+                <div id="celda1" class="celda-trayectoria">
                     <input type="number" name="anio_traspaso" placeholder="Año de traspaso" required>
                     <input type="number" name="anio_ingreso" placeholder="Año de ingreso" required>
+                    <button type="button" class="btn-quitar-trayectoria">−</button>
                 </div>
             </div>
             
