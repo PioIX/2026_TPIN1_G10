@@ -97,8 +97,8 @@ if (formJugador) {
             const aniosIngreso = Array.isArray(f.anio_ingreso) ? f.anio_ingreso : [f.anio_ingreso];
             const trayectorias = aniosTraspaso.map((anioTraspaso, index) => ({
                 id_jugador: idJugador,
-                id_equipo: Number(f.id_equipo) || 0,
-                anio_traspaso: Number(anioTraspaso) || 0,
+                id_equipo: Number(f.id_equipo) || 1,
+                anio_traspaso: Number(anioTraspaso),
                 anio_ingreso: Number(aniosIngreso[index] ?? aniosIngreso[0] ?? 0) || 0
             }));
 
@@ -109,15 +109,16 @@ if (formJugador) {
             const r = await Promise.all([
                 fetch('http://localhost:4000/datos', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datos) }),
                 fetch('http://localhost:4000/estadisticas', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(estadisticas) }),
-                ...trayectorias.map(trayectoria => fetch('http://localhost:4000/trayectoria', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(trayectoria) }))
+                trayectorias.map(trayectoria => fetch('http://localhost:4000/trayectoria', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(trayectoria) }))
             ]);
 
             // Leemos los textos de respuesta de cada petición (mensajes del backend)
             const texts = await Promise.all(r.map(x => x.text()));
 
             // Si alguna petición falló mostramos todos los mensajes unidos, si no, confirmamos y reseteamos el formulario
-            if (r.some(x => !x.ok)) msgJugador.textContent = texts.join(' | ');
-            else {
+            if (r.some(x => !x.ok)) {
+                msgJugador.textContent = texts.join(' | ');
+            } else {
                 msgJugador.textContent = text1 + ' · Guardado.';
                 formJugador.reset();
                 const contenedorTrayectoria = document.getElementById('trayectoria');
