@@ -189,8 +189,8 @@ app.post('/trayectoria', async function(req,res) {
         res.send("La trayectoria ya existe");
     } else {
         await realizarQuery(`
-        INSERT INTO Trayectoria (id_equipo,id_jugador,anio_traspaso,anio_ingreso,club_anterior) VALUES
-        (${req.body.id_equipo},${req.body.id_jugador},${req.body.anio_traspaso},${req.body.anio_ingreso},"${req.body.club_anterior}");
+        INSERT INTO Trayectoria (id_equipo,id_jugador,anio_traspaso,anio_ingreso) VALUES
+        (${req.body.id_equipo},${req.body.id_jugador},${req.body.anio_traspaso},${req.body.anio_ingreso});
         `)
         res.send("Trayectoria agregada")
     }
