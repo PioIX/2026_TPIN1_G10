@@ -1,11 +1,15 @@
+/* Variables de color basadas en tu imagen de referencia */
 :root {
-    --color-fondo-claro: #4ade80; /* Verde claro estilo césped */
-    --color-fondo-oscuro: #166534; /* Verde oscuro */
-    --color-texto: #ffffff;
-    --color-texto-oscuro: #1a1a1a;
-    --color-boton: #15803d;
-    --color-boton-hover: #14532d;
-    --color-tarjeta: rgba(255, 255, 255, 0.15);
+    --color-fondo-claro: #2e7d32; /* Verde césped intenso y elegante */
+    --color-fondo-oscuro: #0a2e13; /* Verde bosque muy oscuro para dar profundidad */
+    
+    --color-texto: #f8fafc; /* Un blanco suave (no puro) para no cansar la vista */
+    --color-texto-oscuro: #0f172a; /* Gris pizarra casi negro, mejor que el negro puro */
+    
+    --color-boton: #fbbf24; /* Dorado/Amarillo para botones (resalta espectacular sobre verde) */
+    --color-boton-hover: #f59e0b; /* Dorado más oscuro al pasar el mouse */
+    
+    --color-tarjeta: rgba(255, 255, 255, 0.12); /* Efecto cristal un poco más sutil */
 }
 
 * {
@@ -33,19 +37,15 @@ header {
     margin: 0 auto; /* Centra el contenedor del header en la pantalla */
 }
 
-header h1{
+header h1 {
     margin: 0;
     text-align: center;
-    line-height: 100px;
+    line-height: 100px; /* Centrado vertical */
     width: 100%;
-    font-size: 4rem;
-    font-weight: 900;
-    font-style: italic;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    text-shadow:
-        0 0 10px rgba(0,0,0,.5),
-        0 4px 0 rgba(0,0,0,.35);
+}
+
+header h1::first-letter{
+    color: #ffbe00;
 }
 
 header img {
@@ -56,224 +56,150 @@ header img {
     width: 80px;
     height: auto;
 }
-/* =================== CONTENIDO =================== */
 
-main{
-    width:100%;
-    max-width:900px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    margin-top:25px;
+hr {
+    width: 80%;
+    border: none;
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    margin: 10px auto 20px auto;
 }
 
-/* =================== MENSAJE =================== */
-
-#mensaje{
-    min-height:35px;
-    margin-bottom:20px;
-    font-size:20px;
-    font-weight:bold;
-    color:#ffffff;
-    text-shadow:0 0 8px rgba(0,0,0,.4);
+/* --- HEADER --- */
+.top-header {
+    width: 100%;
+    height: 60px;
+    background-color: var(--header-bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    border-bottom: 1px solid #1a1a1a;
 }
 
-/* =================== TABLERO =================== */
-
-.tablero{
-
-    display:grid;
-
-    grid-template-columns:repeat(5,72px);
-
-    gap:10px;
-
-    margin-bottom:40px;
-
+.header-left, .header-right {
+    display: flex;
+    gap: 20px;
+    font-size: 22px;
+    cursor: pointer;
 }
 
-/* Casillas */
-
-.casilla{
-
-    width:72px;
-    height:72px;
-
-    border:3px solid rgba(255,255,255,.25);
-
-    border-radius:12px;
-
-    background:rgba(0,0,0,.15);
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    font-size:34px;
-    font-weight:900;
-
-    text-transform:uppercase;
-
-    color:white;
-
-    transition:.25s;
-
+.logo {
+    font-size: 26px;
+    font-weight: 900;
+    font-style: italic;
+    color: var(--futbol-yellow);
+    letter-spacing: 1px;
 }
 
-/* Estados */
-
-.correcta{
-
-    background:#2ecc71;
-    border-color:#2ecc71;
-
+.logo span {
+    color: var(--banner-bg);
 }
 
-.presente{
-
-    background:#f1c40f;
-    border-color:#f1c40f;
-    color:#111;
-
+/* --- BANNER --- */
+.banner {
+    width: 100%;
+    background-color: var(--banner-bg);
+    color: #000;
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 500;
 }
 
-.incorrecta{
-
-    background:#34495e;
-    border-color:#34495e;
-
+.badge {
+    background-color: var(--futbol-yellow);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: bold;
 }
 
-/* Animación */
-
-.casilla:hover{
-
-    transform:scale(1.05);
-
+/* --- MAIN Y MENSAJES --- */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    flex-grow: 1; /* Permite empujar el teclado hacia abajo */
+    padding: 30px 10px;
+    justify-content: space-between; 
 }
 
-/* =================== TECLADO =================== */
-
-#teclado{
-
-    display:flex;
-    flex-direction:column;
-
-    gap:10px;
-
-    align-items:center;
-
+#mensaje {
+    height: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-transform: uppercase;
 }
 
-.fila-teclado{
-
-    display:flex;
-
-    gap:8px;
-
+/* --- TABLERO (Generado por JS) --- */
+.tablero {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: auto; /* Mantiene el tablero arriba */
 }
 
-/* Teclas */
-
-.tecla{
-
-    width:52px;
-    height:58px;
-
-    border:none;
-
-    border-radius:10px;
-
-    background:linear-gradient(
-        180deg,
-        #f2f2f2,
-        #d9d9d9
-    );
-
-    color:#111;
-
-    font-weight:bold;
-
-    font-size:18px;
-
-    cursor:pointer;
-
-    transition:.2s;
-
-    box-shadow:
-        0 4px 8px rgba(0,0,0,.25);
-
+.fila {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
 }
 
-.tecla:hover{
-
-    transform:translateY(-2px);
-
-    background:white;
-
+/* Estilo para los divs que crea el JS */
+.letra {
+    width: 55px;
+    height: 55px;
+    border: 2px solid var(--cell-border);
+    border-radius: 4px;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--text-main);
 }
 
-.grande{
-
-    width:95px;
-
+/* --- TECLADO --- */
+#teclado {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    padding-bottom: 20px;
 }
 
-/* Colores del teclado */
-
-.tecla.correcta{
-
-    background:#2ecc71;
-    color:white;
-
+.fila-teclado {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
 }
 
-.tecla.presente{
-
-    background:#f1c40f;
-    color:#111;
-
+.tecla {
+    background-color: var(--key-bg);
+    color: var(--key-text);
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 14px;
+    height: 50px;
+    flex: 1; 
+    max-width: 42px; /* Evita que las teclas sean demasiado anchas */
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s;
 }
 
-.tecla.incorrecta{
-
-    background:#5d6d7e;
-    color:white;
-
+.tecla:hover {
+    background-color: var(--key-hover);
 }
 
-/* =================== RESPONSIVE =================== */
-
-@media(max-width:700px){
-
-.tablero{
-
-grid-template-columns:repeat(5,55px);
-
-gap:8px;
-
-}
-
-.casilla{
-
-width:55px;
-height:55px;
-font-size:26px;
-
-}
-
-.tecla{
-
-width:38px;
-height:46px;
-font-size:15px;
-
-}
-
-.grande{
-
-width:75px;
-
-}
-
+.tecla.grande {
+    flex: 1.5;
+    max-width: 65px;
+    font-size: 12px;
 }
