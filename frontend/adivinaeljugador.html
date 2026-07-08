@@ -34,58 +34,51 @@
             </div>
 
             <div class="fila-botones">
-                <div id="grupo-botones-2">
-                    <button id="club" class="btn-pill">Club</button>
-                    <button id="pais" class="btn-pill">País</button>
-                    <button id="posicion" class="btn-pill">Posición</button>
-                    <button id="edad" class="btn-pill">Edad</button>
-                    <button id="altura" class="btn-pill">Altura</button>
-                </div>
+                       <div id="grupo-botones-2">
+                <button id="club">Club</button>
+                <button id="pais">País</button>
+                <button id="posicion">Posición</button>
+                <button id="edad">Edad</button>
+                <button id="altura">Altura</button>
             </div>
 
             <div id="comparador" class="hidden">
-                <div class="fila-botones">
-                    <button id="mayor" class="btn-pill">Mayor que</button>
-                    <button id="menor" class="btn-pill">Menor que</button>
-                    <button id="exactamente" class="btn-pill">Exactamente</button>
-                </div>
+                <button id="mayor">Mayor que</button>
+                <button id="menor">Menor que</button>
+                <button id="exactamente">Exactamente</button>
                 <div id="slider-contenedor">
                     <input type="range" id="input-rango" min="150" max="210" value="180">
                     <span id="valor-rango">180 cm</span>
                 </div>
             </div>
 
-            <div class="fila-input-preguntar">
-                <input type="text" id="input-texto" class="input-pill" list="sugerencias" placeholder="Escribe aquí">
-                <datalist id="sugerencias"></datalist>
-                
-                <button id="btn-preguntar" class="btn-accion">Hacer pregunta</button>
-            </div>
+            <input type="text" id="input-texto" list="sugerencias" placeholder="Escribe aquí">
+            <datalist id="sugerencias"></datalist>
+            
+            <button id="btn-preguntar">Hacer pregunta</button>
         </div>
 
         <p id="preguntas-restantes">Tienes 10 preguntas restantes:</p>
         <p id="mensaje-juego" class="mensaje-juego">Selecciona una categoría y haz tu primera pregunta.</p>
 
-        <!-- CAJA DE RESPUESTAS (Borde amarillo) -->
         <div id="caja-respuestas">
             <!-- Las respuestas se mostrarán aquí -->
         </div>
 
+        <div id="caja-adivinar">
+            <input type="text" id="input-adivinar" list="sugerencias-adivinar" placeholder="Escribe el nombre del futbolista">
+            <datalist id="sugerencias-adivinar"></datalist>
+            <button id="btn-adivinar">🚩</button>
+        </div>
+
         <div id="pista" class="pista">Pulsa el icono de cámara para mostrar una pista.</div>
 
-        <!-- BOTONES INFERIORES Y ADIVINAR -->
-        <div id="caja-adivinar">
-            <input type="text" id="input-adivinar" class="input-pill" list="sugerencias-adivinar" placeholder="Escribe el futbolista aquí">
-            <datalist id="sugerencias-adivinar"></datalist>
-            <button id="btn-adivinar" class="btn-icono">🚩</button>
-            
-            <div id="botones-inferiores">
-                <button id="btn-marcar" class="btn-icono" title="Marcar respuesta">📌</button>
-                <button id="btn-camara" class="btn-icono" title="Ver pista">📸</button>
-            </div>
+        <!-- BOTONES INFERIORES -->
+        <div id="botones-inferiores">
+            <button id="btn-marcar">🚩 Marcar respuesta</button>
+            <button id="btn-camara">📸</button>
         </div>
     </main>
-
-    <script src="scripts/logic.js"></script>
+<script src="scripts/adivinaeljugador.js"></script>
 </body>
 </html>
