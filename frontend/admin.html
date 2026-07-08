@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración</title>
+</head>
+<body>
+    <h1>Panel de Administración</h1>
+    <p>Bienvenido, administrador.</p>
+
+    <section>
+        <h2>Jugador completo</h2>
+        <form id="form-jugador-completo">
+            <h3>Jugadores</h3>
+            <input type="text" name="nombre" placeholder="Nombre" required>
+            <input type="text" name="apellido" placeholder="Apellido" required>
+            <input type="text" name="pais" placeholder="País" required>
+            <input type="text" name="posicion" placeholder="Posición" required>
+            <input type="number" name="dorsal_equipo" placeholder="Dorsal equipo" required>
+            <input type="number" name="dorsal_seleccion" placeholder="Dorsal selección" required>
+            <input type="number" name="valor_mercado" placeholder="Valor de mercado" required>
+            <input type="number" name="id_equipo" placeholder="ID del equipo" required>
+
+            <h3>Datos</h3>
+            <input type="number" name="edad" placeholder="Edad" required>
+            <input type="number" name="altura" placeholder="Altura" required>
+            <input type="number" name="peso" placeholder="Peso" required>
+            <input type="text" name="pierna_habil" placeholder="Pierna hábil" required>
+
+            <h3>Estadísticas</h3>
+            <input type="number" name="goles" placeholder="Goles" required>
+            <input type="number" name="asistencias" placeholder="Asistencias" required>
+            <input type="number" name="titulos_equipo" placeholder="Títulos equipo" required>
+            <input type="number" name="titulos_seleccion" placeholder="Títulos selección" required>
+            <input type="number" name="titulos_individuales" placeholder="Títulos individuales" required>
+
+            <h3>Trayectoria</h3>
+            <p>La trayectoria representa la relación muchos a muchos entre jugador y equipo. Podés cargar una fila por equipo en el que pasó.</p>
+            <button id="btn-agregar-trayectoria" type="button">+</button>
+            <div id="trayectoria">
+                <div id="celda1" class="celda-trayectoria">
+                    <input type="number" name="anio_traspaso" placeholder="Año de traspaso" required>
+                    <input type="number" name="anio_ingreso" placeholder="Año de ingreso" required>
+                    <button type="button" class="btn-quitar-trayectoria">−</button>
+                </div>
+            </div>
+            
+            <button type="submit">Guardar jugador completo</button>
+            <p id="mensaje-jugador-completo"></p>
+        </form>
+    </section>
+
+    <section>
+        <h2>Clubes</h2>
+        <form id="form-clubes">
+            <input type="text" name="nombre_equipo" placeholder="Nombre del club" required>
+            <input type="number" name="anio_creacion" placeholder="Año de creación" required>
+            <input type="number" name="titulos_nacionales" placeholder="Títulos nacionales" required>
+            <input type="number" name="titulos_internacionales" placeholder="Títulos internacionales" required>
+            <input type="text" name="ciudad" placeholder="Ciudad" required>
+            <input type="text" name="presidente" placeholder="Presidente" required>
+            <input type="text" name="dt_actual" placeholder="DT actual" required>
+            <input type="text" name="apodo" placeholder="Apodo" required>
+            <input type="number" name="cantidad_socios" placeholder="Cantidad de socios" required>
+            <input type="text" name="estadio" placeholder="Estadio" required>
+            <button type="submit">Guardar club</button>
+            <p id="mensaje-clubes"></p>
+        </form>
+    </section>
+
+    <script src="scripts/admin.js"></script>
+</body>
+</html>

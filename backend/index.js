@@ -62,9 +62,9 @@ app.get('/estadisticas', async function(req,res){
 app.get('/jugadores', async function(req,res){
     let respuesta;
     if (req.query.id != undefined) {
-        respuesta = await realizarQuery(`SELECT * FROM Jugadores WHERE id_jugador=${req.query.id}`)
+        respuesta = await realizarQuery(`SELECT Jugadores.id_jugador, Jugadores.nombre, Jugadores.apellido, Jugadores.pais, Jugadores.posicion, Datos.edad, Datos.altura, Equipos.nombre_equipo, Trayectoria.anio_ingreso, Trayectoria.anio_traspaso FROM Jugadores LEFT JOIN Datos ON Datos.id_jugador = Jugadores.id_jugador LEFT JOIN Trayectoria ON Trayectoria.id_jugador = Jugadores.id_jugador LEFT JOIN Equipos ON Equipos.id_equipo = Trayectoria.id_equipo WHERE Jugadores.id_jugador=${req.query.id}`);
     } else {
-        respuesta = await realizarQuery("SELECT * FROM Jugadores");
+        respuesta = await realizarQuery("SELECT Jugadores.id_jugador, Jugadores.nombre, Jugadores.apellido, Jugadores.pais, Jugadores.posicion, Datos.edad, Datos.altura, Equipos.nombre_equipo, Trayectoria.anio_ingreso, Trayectoria.anio_traspaso FROM Jugadores LEFT JOIN Datos ON Datos.id_jugador = Jugadores.id_jugador LEFT JOIN Trayectoria ON Trayectoria.id_jugador = Jugadores.id_jugador LEFT JOIN Equipos ON Equipos.id_equipo = Trayectoria.id_equipo");
     }    
     res.send(respuesta);
 })
@@ -89,25 +89,18 @@ app.get('/equipos', async function(req,res){
     res.send(respuesta);
 })
 
-app.get('/jugadores', async function(req,res){
-    let respuesta;
-    if (req.query.id != undefined) {
-        respuesta = await realizarQuery(`SELECT * FROM Jugadores INNER JOIN Estadisticas on Estadisticas.id_jugador = Jugadores.id_jugador INNER JOIN Datos on Datos.id_jugador = Estadisticas.id_jugador WHERE Jugadores.id_jugador=${req.query.id}`)
-    } else {
-        respuesta = await realizarQuery("SELECT * FROM Jugadores INNER JOIN Estadisticas on Estadisticas.id_jugador = Jugadores.id_jugador INNER JOIN Datos on Datos.id_jugador = Estadisticas.id_jugador");
-    }    
-    res.send(respuesta);
-})
-
-app.get('/jugadores', async function(req,res){
-    let respuesta;
-    if (req.query.id != undefined) {
-        respuesta = await realizarQuery(`SELECT * FROM Jugadores INNER JOIN Trayectoria on Trayectoria.id_jugador = Jugadores.id_jugador INNER JOIN Equipos on Equipos.id_equipo = Trayectoria.id_equipo WHERE Jugadores.id_jugador=${req.query.id}`)
-    } else {
-        respuesta = await realizarQuery("SELECT * FROM Jugadores INNER JOIN Trayectoria on Trayectoria.id_jugador = Jugadores.id_jugador INNER JOIN Equipos on Equipos.id_equipo = Trayectoria.id_equipo");
-    }    
-    res.send(respuesta);
-})
+// Endpoint para generar la grilla 3x3 con filas/columnas aleatorias
+app.get('/grid', async function(req, res) {
+    try {
+        const equipos = await realizarQuery("SELECT id_equipo, nombre_equipo FROM Equipos");
+        const jugadores = await realizarQuery("SELECT id_jugador, nombre, apellido, pais FROM Jugadores");
+        const trayectorias = await realizarQuery("SELECT id_jugador, id_equipo FROM Trayectoria");
+        return res.json({ equipos, jugadores, trayectorias });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send({ error: 'Error fetching grid data' });
+    }
+});
 
 app.get('/datos', async function(req,res){
     let respuesta;
@@ -189,8 +182,8 @@ app.post('/trayectoria', async function(req,res) {
         res.send("La trayectoria ya existe");
     } else {
         await realizarQuery(`
-        INSERT INTO Trayectoria (id_equipo,id_jugador,anio_traspaso,anio_ingreso,club_anterior) VALUES
-        (${req.body.id_equipo},${req.body.id_jugador},${req.body.anio_traspaso},${req.body.anio_ingreso},"${req.body.club_anterior}");
+        INSERT INTO Trayectoria (id_equipo,id_jugador,anio_traspaso,anio_ingreso) VALUES
+        (${req.body.id_equipo},${req.body.id_jugador},${req.body.anio_traspaso},${req.body.anio_ingreso});
         `)
         res.send("Trayectoria agregada")
     }
