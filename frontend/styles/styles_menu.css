@@ -1,11 +1,14 @@
 :root {
-    --color-fondo-claro: #4ade80; /* Verde claro estilo césped */
-    --color-fondo-oscuro: #166534; /* Verde oscuro */
-    --color-texto: #ffffff;
-    --color-texto-oscuro: #1a1a1a;
-    --color-boton: #15803d;
-    --color-boton-hover: #14532d;
-    --color-tarjeta: rgba(255, 255, 255, 0.15);
+    --color-fondo-claro: #2e7d32; /* Verde césped intenso y elegante */
+    --color-fondo-oscuro: #0a2e13; /* Verde bosque muy oscuro para dar profundidad */
+    
+    --color-texto: #f8fafc; /* Un blanco suave (no puro) para no cansar la vista */
+    --color-texto-oscuro: #0f172a; /* Gris pizarra casi negro, mejor que el negro puro */
+    
+    --color-boton: #fbbf24; /* Dorado/Amarillo para botones (resalta espectacular sobre verde) */
+    --color-boton-hover: #f59e0b; /* Dorado más oscuro al pasar el mouse */
+    
+    --color-tarjeta: rgba(255, 255, 255, 0.12); /* Efecto cristal un poco más sutil */
 }
 
 * {
@@ -38,6 +41,10 @@ header h1 {
     text-align: center;
     line-height: 100px; /* Centrado vertical */
     width: 100%;
+}
+
+header h1::first-letter{
+    color: #ffbe00;
 }
 
 header img {
@@ -97,4 +104,42 @@ hr {
 
 .card button:hover {
     background-color: #e0e0e0;
+}
+
+/* 1. Contenedor para ubicar el botón al fondo y centrado */
+.admin {
+    display: flex;
+    justify-content: center;   /* Centra el botón horizontalmente */
+    margin-top: 60px;          /* Espacio generoso para separarlo de los juegos */
+    padding-bottom: 40px;      /* Espacio extra al final de la página para que respire */
+    width: 100%;
+}
+
+/* 2. Estilo moderno y estético para el botón */
+.admin button {
+    background: rgba(255, 255, 255, 0.05); /* Fondo casi transparente */
+    color: var(--color-texto);
+    border: 2px solid var(--color-boton);  /* Borde con tu verde del root */
+    padding: 12px 28px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;            /* Letras en mayúscula */
+    letter-spacing: 1px;                  /* Espaciado entre letras premium */
+    border-radius: 50px;                  /* Bordes completamente redondeados (estilo píldora) */
+    cursor: pointer;
+    backdrop-filter: blur(5px);           /* Efecto sutil de vidrio esmerilado */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Animación fluida */
+}
+
+/* 3. Efecto dinámico al pasar el mouse (Hover) */
+.admin button:hover {
+    background: var(--color-boton);       /* Se llena con el color verde principal */
+    color: #ffffff;
+    box-shadow: 0 0 20px rgba(21, 128, 61, 0.6); /* Brillo de cancha nocturna */
+    transform: translateY(-3px);          /* Pequeño salto hacia arriba */
+}
+
+/* 4. Efecto al hacer clic */
+.admin button:active {
+    transform: translateY(-1px);
 }
