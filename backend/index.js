@@ -92,8 +92,8 @@ app.get('/equipos', async function(req,res){
 // Endpoint para generar la grilla 3x3 con filas/columnas aleatorias
 app.get('/grid', async function(req, res) {
     try {
-        const jugadores = await realizarQuery("SELECT id_jugador, nombr        const equipos = await realizarQuery("SELECT id_equipo, nombre_equipo FROM Equipos");
-e, apellido, pais FROM Jugadores");
+        const jugadores = await realizarQuery("SELECT id_jugador, nombre, apellido, pais FROM Jugadores");
+        const equipos = await realizarQuery("SELECT id_equipo, nombre_equipo FROM Equipos");
         const trayectorias = await realizarQuery("SELECT id_jugador, id_equipo FROM Trayectoria");
         return res.json({ equipos, jugadores, trayectorias });
     } catch (err) {
