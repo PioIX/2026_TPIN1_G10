@@ -1,7 +1,3 @@
-// ==========================================
-// CONFIGURACIÓN E INITIALIZACIÓN DE ESTADO
-// ==========================================
-
 // Dirección del servidor backend donde se buscan los datos de los jugadores
 const API_URL = 'http://localhost:4000';
 
@@ -49,9 +45,6 @@ const elementos = {
     pista: document.getElementById('pista')
 };
 
-// ==========================================
-// FUNCIONES DE CONTROL DE JUEGO (LÓGICA)
-// ==========================================
 
 // Restablece todas las variables del juego a su punto de partida original
 function inicializarJuego() {

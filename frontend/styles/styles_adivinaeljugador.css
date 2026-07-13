@@ -5,10 +5,10 @@
     --color-texto: #f8fafc; /* Un blanco suave (no puro) para no cansar la vista */
     --color-texto-oscuro: #0f172a; /* Gris pizarra casi negro, mejor que el negro puro */
     
-    --color-boton: #fbbf24; /* Dorado/Amarillo para botones */
+    --color-boton: #fbbf24; /* Dorado/Amarillo para botones (resalta espectacular sobre verde) */
     --color-boton-hover: #f59e0b; /* Dorado más oscuro al pasar el mouse */
     
-    --color-tarjeta: rgba(255, 255, 255, 0.12); /* Efecto cristal sutil */
+    --color-tarjeta: rgba(255, 255, 255, 0.12); /* Efecto cristal un poco más sutil */
 }
 
 * {
@@ -19,6 +19,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Degradado verde que simula los bocetos */
     background: linear-gradient(135deg, var(--color-fondo-claro) 0%, var(--color-fondo-oscuro) 100%);
     color: var(--color-texto);
     min-height: 100vh;
@@ -30,22 +31,41 @@ body {
 header {
     position: relative;
     height: 100px;
-    width: 100%; 
-    max-width: 900px; 
-    margin: 0 auto; 
+    width: 100%; /* El secreto está aquí, para que ocupe todo el ancho disponible */
+    max-width: 900px; /* Opcional: para alinearse perfectamente con el ancho de los juegos */
+    margin: 0 auto; /* Centra el contenedor del header en la pantalla */
 }
 
 header h1 {
     margin: 0;
     text-align: center;
-    line-height: 100px; 
+    line-height: 100px; /* Centrado vertical */
     width: 100%;
-    font-size: 2.5rem;
-    letter-spacing: 2px;
 }
 
-header h1 span {
+header h1::first-letter{
     color: #ffbe00;
+}
+
+header img {
+    position: absolute;
+    left: 20px; /* Lo empuja a la izquierda */
+    top: 50%;
+    transform: translateY(-50%); /* Centrado vertical perfecto de la imagen */
+    width: 80px;
+    height: auto;
+}
+
+hr {
+    width: 80%;
+    border: none;
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    margin: 10px auto 20px auto;
+}
+
+hr {
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    margin: 10px auto 20px auto;
 }
 
 /* --- CONTENEDOR PRINCIPAL --- */
@@ -70,8 +90,8 @@ main {
 }
 
 #contenedor-jugador {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 12px;
     border: 3px solid var(--color-boton);
@@ -86,30 +106,19 @@ main {
     font-size: 60px;
     font-weight: bold;
     color: var(--color-texto-oscuro);
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#silueta img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Para que la foto del jugador llene el recuadro perfectamente */
 }
 
 #dificultad {
     font-size: 24px;
     position: absolute;
     right: 20px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.5); 
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Sombra para que las pelotas resalten en el verde */
 }
 
-/* --- CAJA DE PREGUNTAS (Glassmorphism) --- */
+/* --- CAJA DE PREGUNTAS (Efecto Glassmorphism) --- */
 #caja-preguntas {
     background-color: var(--color-tarjeta);
-    backdrop-filter: blur(10px); 
+    backdrop-filter: blur(10px); /* Desenfoque del fondo verde */
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 16px;
@@ -140,11 +149,11 @@ main {
     flex-wrap: wrap;
 }
 
-/* --- BOTONES ESTILO PÍLDORA --- */
+/* --- BOTONES ESTILO PÍLDORA (INACTIVOS) --- */
 .btn-pill {
-    background-color: rgba(0, 0, 0, 0.25); 
+    background-color: rgba(0, 0, 0, 0.25); /* Fondo oscuro translúcido */
     color: var(--color-texto);
-    border: 1px solid rgba(255, 255, 255, 0.4); 
+    border: 1px solid rgba(255, 255, 255, 0.4); /* Borde blanco sutil para definirlos */
     padding: 8px 18px;
     border-radius: 20px;
     font-weight: 600;
@@ -158,12 +167,13 @@ main {
     border-color: rgba(255, 255, 255, 0.8);
 }
 
+/* --- BOTONES ESTILO PÍLDORA (SELECCIONADOS) --- */
 .selected {
     background-color: var(--color-boton) !important;
     color: var(--color-texto-oscuro) !important;
     border-color: var(--color-boton) !important;
-    box-shadow: 0 0 15px rgba(251, 191, 36, 0.5); 
-    transform: scale(1.03); 
+    box-shadow: 0 0 15px rgba(251, 191, 36, 0.5); /* Resplandor dorado */
+    transform: scale(1.03); /* Se agranda ligeramente */
 }
 
 .hidden {
@@ -228,8 +238,7 @@ main {
 }
 
 .input-pill:disabled {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.5);
     cursor: not-allowed;
 }
 
@@ -258,7 +267,7 @@ main {
 
 .btn-accion:disabled {
     background-color: rgba(0, 0, 0, 0.3);
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.5);
     cursor: not-allowed;
     box-shadow: none;
 }
@@ -283,9 +292,8 @@ main {
 #caja-respuestas {
     width: 100%;
     min-height: 250px;
-    max-height: 350px;
-    background-color: rgba(0, 0, 0, 0.4); 
-    border: 2px solid var(--color-boton); 
+    background-color: rgba(0, 0, 0, 0.4); /* Fondo oscuro translúcido */
+    border: 2px solid var(--color-boton); /* Borde dorado */
     border-radius: 12px;
     padding: 15px;
     margin-bottom: 30px;
@@ -297,7 +305,7 @@ main {
 }
 
 .respuesta {
-    background-color: var(--color-tarjeta); 
+    background-color: var(--color-tarjeta); /* Translúcido */
     padding: 10px 15px;
     border-radius: 8px;
     font-size: 15px;
@@ -309,7 +317,6 @@ main {
 .pista {
     font-size: 15px;
     color: var(--color-boton);
-    margin-top: 15px;
     margin-bottom: 25px;
     opacity: 0.7;
     text-align: center;
@@ -327,11 +334,11 @@ main {
     justify-content: center;
     gap: 12px;
     width: 100%;
-    margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
 #input-adivinar {
-    max-width: 350px;
+    width: 320px;
 }
 
 .btn-icono {
@@ -366,7 +373,5 @@ main {
 #botones-inferiores {
     display: flex;
     gap: 12px;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+    margin-left: 10px;
 }
