@@ -137,8 +137,8 @@ app.post('/usuarios', async function(req,res) {
         res.send("El usuario ya existe");
     } else {
         await realizarQuery(`
-        INSERT INTO Usuarios (nombre_de_usuario,password,email) VALUES
-        ("${req.body.nombre_de_usuario}","${req.body.password}","${req.body.email}");
+        INSERT INTO Usuarios (name,password,email) VALUES
+        ("${req.body.nombre}","${req.body.password}","${req.body.email}");
         `)
         res.send("Usuario registrado")
     }
