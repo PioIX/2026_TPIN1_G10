@@ -296,9 +296,7 @@ function revelarCelda(clave, jugador) {
     if (!celda) return;
 
     celda.innerHTML = `
-        <div style="font-weight: 700;">${jugador.apellido}</div>
-        <div style="font-size: 12px;">${jugador.pais || ""}</div>
-    `;
+        <div style="font-weight: 700;">${jugador.apellido}</div>    `;
 
     const nombreCompleto = `${jugador.nombre} ${jugador.apellido}`;
     consultarAPI(`https://www.thesportsdb.com/api/v1/json/3/searchplayers.php?p=${encodeURIComponent(nombreCompleto)}`, normalizarTexto(nombreCompleto), "player")
